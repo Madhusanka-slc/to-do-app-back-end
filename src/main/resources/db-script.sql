@@ -9,7 +9,7 @@ CREATE  TABLE  `todo_item`(
     `user_name` VARCHAR(200) NOT NULL,
     `description` VARCHAR(500) NOT NULL,
     `status` ENUM('DONE','NOT_DONE') NOT NULL,
-    CONSTRAINT `fk_user` FOREIGN KEY (`user_name`) REFERENCES `user` (`user_name`)
+    CONSTRAINT `fk_user` FOREIGN KEY (`user_name`) REFERENCES `user`(`user_name`)
 );
 
 /* Dummy Data */
