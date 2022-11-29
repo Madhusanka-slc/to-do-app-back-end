@@ -38,7 +38,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void deleteById(String  userName) {
         try {
-            PreparedStatement stm = connection.prepareStatement("DELETE FROM user WHERE user_name = ?");
+            PreparedStatement stm = connection.prepareStatement("DELETE FROM `user` WHERE `user_name` = ?");
             stm.setString(1, userName);
             stm.executeUpdate();
         } catch (SQLException e) {
@@ -51,7 +51,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public boolean existsById(String  userName) {
         try {
-            PreparedStatement stm = connection.prepareStatement("SELECT user_name FROM user WHERE user_name = ?");
+            PreparedStatement stm = connection.prepareStatement("SELECT `user_name` FROM `user` WHERE `user_name` = ?");
             stm.setString(1, userName);
             return stm.executeQuery().next();
         } catch (SQLException e) {
@@ -63,7 +63,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public List findAll() {
         try {
-            PreparedStatement stm = connection.prepareStatement("SELECT * FROM user");
+            PreparedStatement stm = connection.prepareStatement("SELECT * FROM `user`");
             ResultSet rst = stm.executeQuery();
             List<User> userList = new ArrayList<>();
             while (rst.next()) {
@@ -82,7 +82,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public Optional findById(String  userName) {
         try {
-            PreparedStatement stm = connection.prepareStatement("SELECT * FROM user WHERE user_name = ?");
+            PreparedStatement stm = connection.prepareStatement("SELECT * FROM `user` WHERE `user_name` = ?");
             stm.setString(1, userName);
             ResultSet rst = stm.executeQuery();
             if (rst.next()) {
@@ -118,7 +118,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User update(User user) {
         try {
-            PreparedStatement stm = connection.prepareStatement("UPDATE user SET full_name=?, password=? WHERE user_name=?");
+            PreparedStatement stm = connection.prepareStatement("UPDATE `user` SET `full_name`=?, `password`=? WHERE `user_name`=?");
             stm.setString(1, user.getFullName());
             stm.setString(2, user.getPassword());
             stm.setString(3, user.getUserName());

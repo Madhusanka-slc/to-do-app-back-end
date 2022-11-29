@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import lk.ijse.dep9.dao.DAOFactory;
 import lk.ijse.dep9.dao.DAOTypes;
 import lk.ijse.dep9.dao.custom.UserDAO;
+import lk.ijse.dep9.dao.exception.ConstraintViolationException;
 import lk.ijse.dep9.entity.User;
 import lk.ijse.dep9.util.ConnectionUtil;
 import org.junit.jupiter.api.AfterEach;
@@ -16,6 +17,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -56,23 +59,53 @@ class UserDAOTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/user-test-data.csv")
-    void deleteById() {
-
+    void deleteById(String user_name, boolean expectedResult) {
+        try {
+            userDAO.deleteById(user_name);
+        } catch (ConstraintViolationException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    @Test
-    void existsById() {
+    @ParameterizedTest
+    @CsvFileSource (resources = "/user-test-data.csv")
+    void existsById(String user_name, boolean expectedResult) {
+        boolean actualValue =  userDAO.existsById(user_name);
+        assertTrue(actualValue);
     }
 
     @Test
     void findAll() {
+        List<User> users =userDAO.findAll() ;
+        assertEquals(0, users.size());
+        users.forEach(user -> {
+            assertNotNull(user);
+            assertNotNull(user.getUserName());
+            assertNotNull(user.getFullName());
+            assertNotNull(user.getPassword());
+            System.out.println(user);
+        });
+
     }
 
-    @Test
-    void findById() {
+    @ParameterizedTest
+    @CsvFileSource (resources = "/user-test-data.csv")
+    void findById(String user_name, boolean expectedResult) {
+        Optional<User> optUser = userDAO.findById(user_name);
+        assertEquals(optUser.isPresent(), expectedResult);
     }
 
-    @Test
-    void update() {
+    @ParameterizedTest
+    @CsvFileSource (resources = "/user-test-data.csv")
+    void update(String user_name, boolean exist) {
+        Optional<User> optUser = userDAO.findById(user_name);
+        Faker faker = new Faker();
+        optUser.ifPresent(user -> {
+            user.setUserName(faker.name().username());
+            user.setFullName(faker.name().fullName());
+            user.setPassword(faker.internet().password());
+            User updateUser = userDAO.update(user);
+            assertEquals(user,updateUser);
+        });
     }
 }
