@@ -23,6 +23,8 @@ public class DAOFactory {
                 return (T) new UserDAOImpl(connection);
             case TO_DO_ITEM:
                 return (T) new ToDoItemDAOImpl(connection);
+            case QUERY:
+                return (T) new QueryDAOImpl(connection);
 
             default:
                 return null;
