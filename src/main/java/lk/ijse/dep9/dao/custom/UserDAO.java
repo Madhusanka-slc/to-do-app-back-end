@@ -5,4 +5,5 @@ import lk.ijse.dep9.entity.User;
 
 public interface UserDAO extends CrudDAO<User, String> {
 
+
 }

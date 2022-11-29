@@ -26,7 +26,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public long count() {
         try {
-            PreparedStatement stm = connection.prepareStatement("SELECT COUNT(user_name) FROM user");
+            PreparedStatement stm = connection.prepareStatement("SELECT COUNT(`user_name`) FROM `user`");
             ResultSet rst = stm.executeQuery();
             rst.next();
             return rst.getLong(1);
