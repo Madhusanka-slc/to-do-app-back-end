@@ -5,6 +5,8 @@ import lk.ijse.dep9.service.custome.UserService;
 import lk.ijse.dep9.service.exception.DuplicateException;
 import lk.ijse.dep9.service.exception.NotFoundException;
 
+import java.util.List;
+
 public class UserServiceImpl implements UserService {
     @Override
     public void signupMember(UserDTO user) throws DuplicateException {
