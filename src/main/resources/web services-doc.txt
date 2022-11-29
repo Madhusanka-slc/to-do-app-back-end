@@ -1,12 +1,12 @@
 Users
-    create a new user account           POST    /users
-    delete an existing user account     DELETE  /users{username}
-    get user account details            GET     /users{username}
+    M1 create a new user account           POST    /users
+    M1 delete an existing user account     DELETE  /users{username}
+    M1 get user account details            GET     /users{username}
     [login]
 
 To-do Item
-    Create a new to-do item            POST    /users/{username}/items
-    update an existing to-do item      PATCH    /users/{username}/items{item-id}
-    delete a to-do Item                DELETE  /users/{username}/items{item-id}
-    get all to-do items                GET    /users/{username}/items
-    delete all items                   DELETE  /users/{username}/items
+    M2 Create a new to-do item            POST    /users/{username}/items
+    M2 update an existing to-do item      PATCH    /users/{username}/items{item-id}
+    M2 delete a to-do Item                DELETE  /users/{username}/items{item-id}
+    M1 get all to-do items                GET    /users/{username}/items
+    M2 delete all items                   DELETE  /users/{username}/items
