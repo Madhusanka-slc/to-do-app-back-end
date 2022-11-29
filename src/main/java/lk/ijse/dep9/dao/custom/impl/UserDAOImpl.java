@@ -1,6 +1,7 @@
 package lk.ijse.dep9.dao.custom.impl;
 
 import lk.ijse.dep9.dao.custom.UserDAO;
+import lk.ijse.dep9.dao.exception.ConstraintViolationException;
 import lk.ijse.dep9.entity.SuperEntity;
 import lk.ijse.dep9.entity.User;
 
@@ -41,7 +42,7 @@ public class UserDAOImpl implements UserDAO {
             stm.setString(1, userName);
             stm.executeUpdate();
         } catch (SQLException e) {
-            if (existsById(userName)) throw new RuntimeException(e);
+            if (existsById(userName)) throw new ConstraintViolationException("User name use the other tables", e);
             throw new RuntimeException(e);
         }
 
@@ -69,7 +70,6 @@ public class UserDAOImpl implements UserDAO {
                 String userName = rst.getString("user_name");
                 String fullName = rst.getString("full_name");
                 String password = rst.getString("password");
-                int copies = rst.getInt("copies");
                 userList.add(new User(userName, fullName, password));
             }
             return userList;
@@ -100,7 +100,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User save(User user) {
         try {
-            PreparedStatement stm = connection.prepareStatement("INSERT INTO book (user_name, full_name, password) VALUES (?, ?, ?)");
+            PreparedStatement stm = connection.prepareStatement("INSERT INTO user (user_name, full_name, password) VALUES (?, ?, ?)");
             stm.setString(1, user.getUserName());
             stm.setString(2, user.getFullName());
             stm.setString(3, user.getPassword());
@@ -118,7 +118,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User update(User user) {
         try {
-            PreparedStatement stm = connection.prepareStatement("UPDATE book SET full_name=?, password=? WHERE user_name=?");
+            PreparedStatement stm = connection.prepareStatement("UPDATE user SET full_name=?, password=? WHERE user_name=?");
             stm.setString(1, user.getFullName());
             stm.setString(2, user.getPassword());
             stm.setString(3, user.getUserName());
