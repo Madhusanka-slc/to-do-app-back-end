@@ -11,3 +11,7 @@ CREATE  TABLE  `todo_item`(
     `status` ENUM('DONE','NOT_DONE') NOT NULL,
     CONSTRAINT `fk_user` FOREIGN KEY (`user_name`) REFERENCES `user`(`user_name`)
 );
+
+/* Dummy Data */
+
+INSERT INTO `user` (`user_name`, `full_name`, `password`) VALUES ('Kasun', 'Nuwan', '1234567');
