@@ -3,3 +3,4 @@ CREATE TABLE user(
     full_name VARCHAR(300) NOT NULL ,
     password VARCHAR(50) NOT NULL
 );
+
