@@ -26,7 +26,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public long count() {
         try {
-            PreparedStatement stm = connection.prepareStatement("SELECT COUNT(user_name) FROM user");
+            PreparedStatement stm = connection.prepareStatement("SELECT COUNT(`user_name`) FROM `user`");
             ResultSet rst = stm.executeQuery();
             rst.next();
             return rst.getLong(1);
@@ -100,7 +100,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User save(User user) {
         try {
-            PreparedStatement stm = connection.prepareStatement("INSERT INTO user (user_name, full_name, password) VALUES (?, ?, ?)");
+            PreparedStatement stm = connection.prepareStatement("INSERT INTO `user` (`user_name`, `full_name`, `password`) VALUES (?, ?, ?)");
             stm.setString(1, user.getUserName());
             stm.setString(2, user.getFullName());
             stm.setString(3, user.getPassword());
