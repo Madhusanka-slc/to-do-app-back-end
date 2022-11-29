@@ -1,12 +1,10 @@
 package lk.ijse.dep9.dao.custom.impl;
 
-import lk.ijse.dep9.dao.StatusType;
+import lk.ijse.dep9.entity.util.StatusType;
 import lk.ijse.dep9.dao.custom.ToDoItemDAO;
 import lk.ijse.dep9.dao.exception.ConstraintViolationException;
-import lk.ijse.dep9.entity.SuperEntity;
 import lk.ijse.dep9.entity.ToDoItem;
 
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
